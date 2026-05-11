@@ -51,6 +51,23 @@
   --dur-fast: 120ms;
   --dur-med: 220ms;
   --dur-slow: 420ms;
+
+  /* Named choreography durations (match GSAP hooks in patterns.md). */
+  --dur-hover-shift: 180ms;
+  --dur-drawer: 400ms;
+  --dur-drawer-backdrop: 300ms;
+  --dur-section-entrance: 450ms;
+  --dur-card-cascade: 350ms;
+  --dur-tag-toggle: 400ms;
+  --dur-cost-bar: 500ms;
+
+  /* --- Editorial prose widths -------------------------------------- */
+  --prose-narrow: 42rem;   /* lede paragraphs */
+  --prose-body: 69ch;      /* EditorialContent paragraph */
+  --prose-list: 70ch;
+  --prose-code: 72ch;
+  --prose-display: 46rem;  /* KnowledgeEditorialSummary hero */
+  --prose-h1: 16ch;
 }
 
 /* =========================================================================
@@ -91,6 +108,14 @@ html[data-theme="light"], :root {
   --status-done:    oklch(0.56 0.12 var(--status-done-hue));
   --status-blocked: oklch(0.58 0.17 var(--status-blocked-hue));
 
+  /* Tinted backgrounds for status panels (operator brief, quote, etc.) */
+  --status-active-tint:  oklch(from var(--status-active)  l c h / 0.05);
+  --status-review-tint:  oklch(from var(--status-review)  l c h / 0.06);
+  --status-pending-tint: oklch(from var(--status-pending) l c h / 0.06);
+  --status-done-tint:    oklch(from var(--status-done)    l c h / 0.06);
+  --status-blocked-tint: oklch(from var(--status-blocked) l c h / 0.06);
+  --status-active-line:  oklch(from var(--status-active)  l c h / 0.35);
+
   --shadow-xs: 0 1px 0 oklch(0.22 0.012 72 / 0.04);
   --shadow-sm: 0 1px 2px oklch(0.22 0.012 72 / 0.06), 0 1px 0 oklch(1 0 0 / 0.6) inset;
   --shadow-md: 0 4px 14px -6px oklch(0.22 0.012 72 / 0.1), 0 1px 0 oklch(1 0 0 / 0.6) inset;
@@ -129,6 +154,13 @@ html[data-theme="dark"] {
   --status-pending: oklch(0.76 0.1 var(--status-pending-hue));
   --status-done:    oklch(0.76 0.12 var(--status-done-hue));
   --status-blocked: oklch(0.74 0.17 var(--status-blocked-hue));
+
+  --status-active-tint:  oklch(from var(--status-active)  l c h / 0.10);
+  --status-review-tint:  oklch(from var(--status-review)  l c h / 0.12);
+  --status-pending-tint: oklch(from var(--status-pending) l c h / 0.12);
+  --status-done-tint:    oklch(from var(--status-done)    l c h / 0.10);
+  --status-blocked-tint: oklch(from var(--status-blocked) l c h / 0.12);
+  --status-active-line:  oklch(from var(--status-active)  l c h / 0.40);
 
   --shadow-xs: 0 1px 0 oklch(0 0 0 / 0.4);
   --shadow-sm: 0 2px 6px oklch(0 0 0 / 0.45), 0 1px 0 oklch(1 0 0 / 0.05) inset;

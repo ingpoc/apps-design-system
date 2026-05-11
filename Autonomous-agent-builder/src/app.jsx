@@ -4,7 +4,7 @@ const {
   cn, Button, Eyebrow, Kbd, BrandMark, LivePulse, Tabs, StatusDot, StatusPill,
   BoardPage, AgentPage, MetricsPage, ObservabilityPage, KnowledgePage, MemoryPage, BacklogPage, OnboardingPage,
   InboxPage, ComparePage, CommandPalette, APPROVAL_GATES,
-  TokensPanel, TweaksPanel,
+  TokensPanel, SettingsPage, VoiceProvider, FloatingVoiceDock,
 } = window;
 
 /* Real nav order from App.tsx — Observability sits between Metrics and Knowledge */
@@ -16,12 +16,14 @@ const ROUTES = [
   { key: "knowledge",     label: "Knowledge" },
   { key: "memory",        label: "Memory" },
   { key: "backlog",       label: "Backlog" },
+  { key: "settings",      label: "Settings" },
 ];
 
 /* Routes reachable via utility buttons / palette / hotkeys but not in main nav */
 const ROUTE_JUMPS = {
   a: "agent", b: "board", m: "metrics", o: "observability",
   k: "knowledge", y: "memory", l: "backlog",
+  s: "settings",
   i: "inbox", c: "compare",
 };
 
@@ -30,7 +32,6 @@ function App() {
   const [task, setTask] = React.useState(null);
   const [inspectorOpen, setInspectorOpen] = React.useState(false);
   const [paletteOpen, setPaletteOpen] = React.useState(false);
-  const [settingsOpen, setSettingsOpen] = React.useState(false);
 
   React.useEffect(() => { localStorage.setItem("aab.route", route); }, [route]);
 
@@ -87,7 +88,8 @@ function App() {
       <AppChrome
         route={route}
         onRoute={setRoute}
-        onOpenInspector={() => setSettingsOpen(true)}
+        onOpenInspector={() => setInspectorOpen(true)}
+        onOpenSettings={() => setRoute("settings")}
         onOpenPalette={() => setPaletteOpen(true)}
         pendingGateCount={pendingGateCount}
       />
@@ -102,9 +104,10 @@ function App() {
         {route === "onboarding" && <OnboardingPage />}
         {route === "inbox" && <InboxPage onSelectTask={handleSelectTask} />}
         {route === "compare" && <ComparePage />}
+        {route === "settings" && <SettingsPage />}
       </main>
       <TokensPanel open={inspectorOpen} onClose={() => setInspectorOpen(false)} />
-      <TweaksPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <FloatingVoiceDock />
       <CommandPalette
         open={paletteOpen}
         onClose={() => setPaletteOpen(false)}
@@ -248,7 +251,7 @@ function NavPills({ route, onRoute, mobile = false }) {
   );
 }
 
-function AppChrome({ route, onRoute, onOpenInspector, onOpenPalette, pendingGateCount }) {
+function AppChrome({ route, onRoute, onOpenInspector, onOpenSettings, onOpenPalette, pendingGateCount }) {
   const [condensed, setCondensed] = React.useState(false);
   React.useEffect(() => {
     const onScroll = () => setCondensed(window.scrollY > 24);
@@ -349,6 +352,17 @@ function AppChrome({ route, onRoute, onOpenInspector, onOpenPalette, pendingGate
               </svg>
             }
           />
+          <UtilityIconButton
+            label="Settings"
+            active={route === "settings"}
+            onClick={onOpenSettings}
+            icon={
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="1.8" stroke="currentColor" strokeWidth="1.3"/>
+                <path d="M7 1.5v2M7 10.5v2M1.5 7h2M10.5 7h2M3 3l1.4 1.4M9.6 9.6L11 11M11 3L9.6 4.4M4.4 9.6L3 11" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
+              </svg>
+            }
+          />
           <ThemeToggle />
         </div>
       </div>
@@ -362,4 +376,4 @@ function AppChrome({ route, onRoute, onOpenInspector, onOpenPalette, pendingGate
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<VoiceProvider><App /></VoiceProvider>);
