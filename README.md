@@ -8,7 +8,7 @@ A multi-app design system monorepo containing locked tokens, themes, primitive c
 Autonomous-agent-builder/
 ├── tokens.css                              # Design tokens (color, type, spacing, radius, shadow, status)
 ├── Autonomous Agent Builder - Design System.html  # Visual reference (standalone)
-├── skills/builder-design-system/
+├── skills/autonomous-agent-builder-design-system/
 │   ├── SKILL.md                            # Skill invocation rules & workflow
 │   ├── components.md                       # Primitive component API contracts
 │   ├── patterns.md                         # Page-level layout patterns & conformance checklist
@@ -125,7 +125,7 @@ Each app ships a self-contained skill that bundles tokens, components, patterns,
 
 | App | Skill | Path |
 |---|---|---|
-| Autonomous Agent Builder | `builder-design-system` | `Autonomous-agent-builder/skills/builder-design-system/` |
+| Autonomous Agent Builder | `autonomous-agent-builder-design-system` | `Autonomous-agent-builder/skills/autonomous-agent-builder-design-system/` |
 
 ### Skill Usage
 
